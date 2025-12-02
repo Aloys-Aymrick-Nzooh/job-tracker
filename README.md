@@ -10,11 +10,10 @@ A simple web-based application to track and manage your job applications. All da
 - **Excel Storage**: All data saved to `job-applications.xlsx` for easy access and portability
 - **Auto-sync**: Changes are immediately saved to the Excel file
 
-<<<<<<< HEAD
-![Application Interface](images\Screenshot 2025-12-02 173713.png)
 
-=======
->>>>>>> 62db9f845352981c3c815fb63861f4983b292173
+![Job application tracker interface showing a form to add a new application with fields for company, position, location, date applied, status, salary range, contact person, job URL, and notes. Below the form is a table listing existing applications with columns for company, position, location, date, status, salary, contact, notes, and actions. The interface is clean, organized, and professional, using a calm color scheme. Visible text includes New Application, Add, Company, Position, Location, Date Applied, Status, Salary Range, Contact Person, Job URL, Notes, Add Application, COMPANY, POSITION, LOCATION, DATE, STATUS, SALARY, CONTACT, NOTES, ACTIONS, Edit, and Delete.](images/Screenshot%202025-12-02%20173713.png)
+
+
 ### AI-Powered Assistant 
 - **CV Analysis**: Upload your CV and get match analysis for any job
 - **Tailored CV**: AI rewrites your CV to match job requirements
@@ -22,14 +21,11 @@ A simple web-based application to track and manage your job applications. All da
 - **Recruiter Messages**: 3 ready-to-use templates (LinkedIn + Email)
 - **PDF Package**: Download everything in one professional PDF
 - **Career Chat**: Ask the AI career advisor anything
+![Screenshot of the CV analysis and letter of motivation generation interface. The interface displays fields for uploading a CV PDF, entering the company name, position, and job description (either via URL or pasted text). A prominent "Analyze and Generate Package" button is shown at the bottom. The design is clean and modern, with a professional and calm appearance. Visible text includes: "Upload and Analyze," "Upload Your CV PDF," "Company Name," "Position," "Job Description URL (optional)," "Job Description (paste here if no URL)," and "Analyze and Generate Package."](images/Screenshot%202025-12-02%20173634.png)
 
-<<<<<<< HEAD
-![CV Analysis and Letter of motivation Generation](images\Screenshot 2025-12-02 173634.png)
 
-![Chat with AI](images\Screenshot 2025-12-02 173645.png)
+![Chat interface with AI Career Advisor showing a welcoming message offering help with job search topics such as interviews, salary negotiation, and resume tips. The interface includes a large chat area, a text input field labeled Ask me anything about job applications, and a Send button. The design is clean and minimal, creating a professional and approachable atmosphere. Visible text includes Chat with AI Career Advisor, Hi I am here to help with your job search. Ask me about interviews, salary negotiation, resume tips, or anything else](images/Screenshot%202025-12-02%20173645.png)
 
-=======
->>>>>>> 62db9f845352981c3c815fb63861f4983b292173
 ### Statistics Dashboard 
 - Total applications count
 - Pending, interview, and offer tracking
@@ -37,7 +33,7 @@ A simple web-based application to track and manage your job applications. All da
 - Interview success rate
 - Visual statistics cards
 
-![Statistical Dashboard](images\Screenshot 2025-12-02 173619.png)
+![Job Applications statistics dashboard showing five summary cards:  total applications,  pending,  interviews,  offers, and  rejection. Below, a card displays  percent interview rate. The interface uses a clean, modern design with colored borders for each card. The environment is professional and organized, with a calm and neutral tone. Visible text includes Job Applications, Statistics Overview, Total Applications, Pending, Interviews, Offers, Rejections, Interview Rate, and Auto-sync enabled.](images/Screenshot%202025-12-02%20173619.png)
 
 
 ## How It Works
