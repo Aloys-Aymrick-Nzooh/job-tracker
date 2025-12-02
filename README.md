@@ -25,12 +25,12 @@ When you add, edit, or delete an application, the changes are sent to the API an
 
 1. **Pull the Docker image**:
    ```bash
-   docker pull aloys-aymrick-nzooh/job-tracker:latest
+   docker pull aymrick2803/job-tracker:latest
    ```
 
 2. **Run the container**:
    ```bash
-   docker run -d -p 8000:8000 -v $(pwd)/data:/app Aloys-Aymrick-Nzooh/job-tracker:latest
+   docker run -d -p 8000:8000 -v $(pwd)/data:/app aymrick2803/job-tracker:latest
    ```
    
    This creates a `data` folder in your current directory where `job-applications.xlsx` will be stored.
