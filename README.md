@@ -10,7 +10,7 @@ A simple web-based application to track and manage your job applications. All da
 - **Excel Storage**: All data saved to `job-applications.xlsx` for easy access and portability
 - **Auto-sync**: Changes are immediately saved to the Excel file
 
-### AI-Powered Assistant 🤖
+### AI-Powered Assistant 
 - **CV Analysis**: Upload your CV and get match analysis for any job
 - **Tailored CV**: AI rewrites your CV to match job requirements
 - **Cover Letter Generator**: Professional, personalized cover letters
@@ -18,7 +18,7 @@ A simple web-based application to track and manage your job applications. All da
 - **PDF Package**: Download everything in one professional PDF
 - **Career Chat**: Ask the AI career advisor anything
 
-### Statistics Dashboard 📊
+### Statistics Dashboard 
 - Total applications count
 - Pending, interview, and offer tracking
 - Rejection count
