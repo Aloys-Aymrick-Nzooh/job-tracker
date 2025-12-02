@@ -61,17 +61,6 @@ When you add, edit, or delete an application, the changes are sent to the API an
 5. **Access the application**:
    Open your browser and go to `http://localhost:8000`
 
-## Building Your Own Docker Image
-
-If you want to build the Docker image yourself:
-
-```bash
-# Build the image
-docker build -t job-tracker .
-
-# Run the container
-docker run -d -p 8000:8000 -v $(pwd)/data:/app job-tracker
-```
 
 ## Project Structure
 
