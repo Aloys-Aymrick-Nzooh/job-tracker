@@ -10,8 +10,11 @@ A simple web-based application to track and manage your job applications. All da
 - **Excel Storage**: All data saved to `job-applications.xlsx` for easy access and portability
 - **Auto-sync**: Changes are immediately saved to the Excel file
 
+<<<<<<< HEAD
 ![Application Interface](images\Screenshot 2025-12-02 173713.png)
 
+=======
+>>>>>>> 62db9f845352981c3c815fb63861f4983b292173
 ### AI-Powered Assistant 
 - **CV Analysis**: Upload your CV and get match analysis for any job
 - **Tailored CV**: AI rewrites your CV to match job requirements
@@ -20,10 +23,13 @@ A simple web-based application to track and manage your job applications. All da
 - **PDF Package**: Download everything in one professional PDF
 - **Career Chat**: Ask the AI career advisor anything
 
+<<<<<<< HEAD
 ![CV Analysis and Letter of motivation Generation](images\Screenshot 2025-12-02 173634.png)
 
 ![Chat with AI](images\Screenshot 2025-12-02 173645.png)
 
+=======
+>>>>>>> 62db9f845352981c3c815fb63861f4983b292173
 ### Statistics Dashboard 
 - Total applications count
 - Pending, interview, and offer tracking

@@ -39,7 +39,7 @@ Go to: `http://localhost:8000`
 
 ---
 
-## 💡 How to Use
+## How to Use
 
 ### Track Applications
 1. Fill out the form at top
