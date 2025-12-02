@@ -317,6 +317,73 @@
         .toast.error {
             background: #e74c3c;
         }
+
+        .stats-section {
+            background: white;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stats-section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-total { border-left-color: #3498db; }
+        .stat-pending { border-left-color: #f39c12; }
+        .stat-interview { border-left-color: #9b59b6; }
+        .stat-offer { border-left-color: #27ae60; }
+        .stat-rejected { border-left-color: #e74c3c; }
+        .stat-rate { border-left-color: #1abc9c; }
+
+        .stat-icon {
+            font-size: 32px;
+            opacity: 0.8;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
         
         @keyframes slideIn {
             from {
@@ -328,6 +395,7 @@
                 opacity: 1;
             }
         }
+
     </style>
 </head>
 <body>
@@ -339,6 +407,59 @@
                 <span>Auto-sync enabled</span>
             </div>
         </div>
+        <div class="stats-section">
+            <h2>Statistics Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card stat-total">
+                    <div class="stat-icon"></div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalApps">0</div>
+                        <div class="stat-label">Total Applications</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-pending">
+                    <div class="stat-icon"></div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="pendingApps">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-interview">
+                    <div class="stat-icon"></div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="interviewApps">0</div>
+                        <div class="stat-label">Interviews</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-offer">
+                    <div class="stat-icon"></div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="offerApps">0</div>
+                        <div class="stat-label">Offers</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-rejected">
+                    <div class="stat-icon"></div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="rejectedApps">0</div>
+                        <div class="stat-label">Rejections</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card stat-rate">
+                    <div class="stat-icon"></div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="successRate">0%</div>
+                        <div class="stat-label">Interview Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
         <div class="content">
             <div class="form-section">
@@ -452,16 +573,6 @@
             setTimeout(() => div.remove(), 3000);
         }
         
-        async function loadApps() {
-            try {
-                const res = await fetch(`${API}/applications`);
-                apps = await res.json();
-                renderTable();
-            } catch (err) {
-                console.error(err);
-                toast('Could not load applications', 'error');
-            }
-        }
         
         function renderTable() {
             const tbody = document.getElementById('tableBody');
@@ -616,6 +727,39 @@
         
         document.getElementById('dateApplied').valueAsDate = new Date();
         loadApps();
+
+        function updateStatistics() {
+            const total = apps.length;
+            const pending = apps.filter(a => a.Status === 'Applied').length;
+            const interviews = apps.filter(a => 
+                a.Status === 'Interview Scheduled' || a.Status === 'Interviewed'
+            ).length;
+            const offers = apps.filter(a => a.Status === 'Offer Received').length;
+            const rejected = apps.filter(a => a.Status === 'Rejected').length;
+            
+            const interviewRate = total > 0 
+                ? Math.round(((interviews + offers) / total) * 100) 
+                : 0;
+            
+            document.getElementById('totalApps').textContent = total;
+            document.getElementById('pendingApps').textContent = pending;
+            document.getElementById('interviewApps').textContent = interviews;
+            document.getElementById('offerApps').textContent = offers;
+            document.getElementById('rejectedApps').textContent = rejected;
+            document.getElementById('successRate').textContent = interviewRate + '%';
+        }
+
+        async function loadApps() {
+            try {
+                const res = await fetch(`${API}/applications`);
+                apps = await res.json();
+                renderTable();
+                updateStatistics();
+            } catch (err) {
+                console.error(err);
+                toast('Could not load applications', 'error');
+            }
+        }
     </script>
 </body>
 </html>
