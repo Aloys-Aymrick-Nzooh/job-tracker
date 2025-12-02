@@ -384,7 +384,258 @@
             color: #7f8c8d;
             font-weight: 500;
         }
-        
+
+        .ai-assistant-section {
+            background: white;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .ai-status {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .ai-status.online {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .ai-status.offline {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .ai-container {
+            margin-top: 20px;
+        }
+
+        .ai-upload-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .ai-upload-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: #2c3e50;
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .upload-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .upload-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .upload-field label {
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .upload-field input,
+        .upload-field textarea {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .upload-field small {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .upload-field textarea {
+            resize: vertical;
+        }
+
+        .btn-analyze {
+            width: 100%;
+            padding: 14px;
+            font-size: 15px;
+            margin-top: 8px;
+        }
+
+        .ai-results {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .results-header h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .btn-download {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .result-tabs {
+            display: flex;
+            background: #e9ecef;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6c757d;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .tab-btn:hover {
+            background: #dee2e6;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #2c3e50;
+            border-bottom: 3px solid #2c3e50;
+        }
+
+        .result-content {
+            padding: 20px;
+            background: white;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .copy-hint {
+            background: #fff3cd;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #856404;
+            border-left: 3px solid #ffc107;
+        }
+
+        .tab-pane pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 16px;
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-copy {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .ai-chat-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .ai-chat-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: #2c3e50;
+        }
+
+        .chat-messages {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .chat-message.user {
+            background: #e3f2fd;
+            margin-left: 20%;
+        }
+
+        .chat-message.ai {
+            background: #f5f5f5;
+            margin-right: 20%;
+        }
+
+        .chat-message .sender {
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 4px;
+            color: #555;
+        }
+
+        .chat-message .text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input-container input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+            
         @keyframes slideIn {
             from {
                 transform: translateX(400px);
@@ -459,6 +710,121 @@
                 </div>
             </div>
         </div>
+
+        <div class="ai-assistant-section">
+            <div class="section-header">
+                <h2>🤖 AI Job Application Assistant</h2>
+                <span id="aiStatus" class="ai-status">Checking...</span>
+            </div>
+            
+            <div class="ai-container">
+                <!-- Upload Section -->
+                <div class="ai-upload-section">
+                    <h3>Upload & Analyze</h3>
+                    <form id="aiAnalysisForm">
+                        <div class="upload-grid">
+                            <div class="upload-field full-width">
+                                <label>Upload Your CV (PDF) *</label>
+                                <input type="file" id="cvFile" accept=".pdf" required>
+                                <small>Max 5MB - Text-based PDF only</small>
+                            </div>
+                        </div>
+                        
+                        <div class="upload-grid">
+                            <div class="upload-field">
+                                <label>Company Name *</label>
+                                <input type="text" id="aiCompany" placeholder="e.g., Google" required>
+                            </div>
+                            
+                            <div class="upload-field">
+                                <label>Position *</label>
+                                <input type="text" id="aiPosition" placeholder="e.g., Senior Developer" required>
+                            </div>
+                        </div>
+                        
+                        <div class="upload-field">
+                            <label>Job Description URL (optional)</label>
+                            <input type="url" id="jobUrl" placeholder="https://company.com/careers/job-id">
+                            <small>Or paste the job description below</small>
+                        </div>
+                        
+                        <div class="upload-field">
+                            <label>Job Description (paste here if no URL)</label>
+                            <textarea id="jobDescription" rows="6" placeholder="Paste the full job description here..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary btn-analyze">
+                            <span class="btn-text">Analyze & Generate Package</span>
+                            <span class="btn-loader" style="display:none;">Processing (30-60s)...</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results Section -->
+                <div id="aiResults" class="ai-results" style="display:none;">
+                    <div class="results-header">
+                        <h3> Your Application Package</h3>
+                        <button class="btn-primary btn-download" onclick="downloadPDF()">
+                             Download PDF Package
+                        </button>
+                    </div>
+                    
+                    <div class="result-tabs">
+                        <button class="tab-btn active" data-tab="analysis"> Analysis</button>
+                        <button class="tab-btn" data-tab="cv"> Tailored CV</button>
+                        <button class="tab-btn" data-tab="cover"> Cover Letter</button>
+                        <button class="tab-btn" data-tab="messages"> Recruiter Messages</button>
+                    </div>
+                    
+                    <div class="result-content">
+                        <div id="tab-analysis" class="tab-pane active">
+                            <pre id="analysisContent"></pre>
+                        </div>
+                        
+                        <div id="tab-cv" class="tab-pane">
+                            <div class="copy-hint"> Copy this and use it for your application</div>
+                            <pre id="cvContent"></pre>
+                            <button class="btn-secondary btn-copy" onclick="copyToClipboard('cvContent')">
+                                 Copy CV
+                            </button>
+                        </div>
+                        
+                        <div id="tab-cover" class="tab-pane">
+                            <div class="copy-hint">✨ Personalize and send with your application</div>
+                            <pre id="coverContent"></pre>
+                            <button class="btn-secondary btn-copy" onclick="copyToClipboard('coverContent')">
+                                Copy Cover Letter
+                            </button>
+                        </div>
+                        
+                        <div id="tab-messages" class="tab-pane">
+                            <div class="copy-hint"> Use these templates to reach out to recruiters on LinkedIn or via email</div>
+                            <pre id="messagesContent"></pre>
+                            <button class="btn-secondary btn-copy" onclick="copyToClipboard('messagesContent')">
+                                 Copy Messages
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat Section -->
+                <div class="ai-chat-section">
+                    <h3> Chat with AI Career Advisor</h3>
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="chat-message ai">
+                            <div class="sender">AI Career Advisor</div>
+                            <div class="text">Hi! I'm here to help with your job search. Ask me about interviews, salary negotiation, resume tips, or anything else!</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chatInput" placeholder="Ask me anything about job applications...">
+                        <button onclick="sendChatMessage()" class="btn-primary">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         
         <div class="content">
@@ -748,6 +1114,219 @@
             document.getElementById('rejectedApps').textContent = rejected;
             document.getElementById('successRate').textContent = interviewRate + '%';
         }
+
+        let currentAnalysisData = null;
+
+        // Check Ollama status
+        async function checkAIStatus() {
+            try {
+                const res = await fetch(`${API}/ai/status`);
+                const data = await res.json();
+                const statusEl = document.getElementById('aiStatus');
+                
+                if (data.available) {
+                    statusEl.textContent = '🟢 AI Online';
+                    statusEl.className = 'ai-status online';
+                } else {
+                    statusEl.textContent = '🔴 AI Offline';
+                    statusEl.className = 'ai-status offline';
+                }
+            } catch (err) {
+                document.getElementById('aiStatus').textContent = '🔴 AI Offline';
+                document.getElementById('aiStatus').className = 'ai-status offline';
+            }
+        }
+
+        // Handle AI analysis form submission
+        document.getElementById('aiAnalysisForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('.btn-analyze');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoader = btn.querySelector('.btn-loader');
+            
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline';
+            
+            const formData = new FormData();
+            formData.append('cv', document.getElementById('cvFile').files[0]);
+            formData.append('jobUrl', document.getElementById('jobUrl').value);
+            formData.append('jobDescription', document.getElementById('jobDescription').value);
+            formData.append('companyName', document.getElementById('aiCompany').value);
+            formData.append('position', document.getElementById('aiPosition').value);
+            
+            try {
+                const res = await fetch(`${API}/ai/analyze`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                    currentAnalysisData = {
+                        tailoredCV: data.tailoredCV,
+                        coverLetter: data.coverLetter,
+                        companyName: document.getElementById('aiCompany').value,
+                        position: document.getElementById('aiPosition').value
+                    };
+                    
+                    document.getElementById('analysisContent').textContent = data.analysis;
+                    document.getElementById('cvContent').textContent = data.tailoredCV;
+                    document.getElementById('coverContent').textContent = data.coverLetter;
+                    document.getElementById('messagesContent').textContent = data.recruiterMessages;
+                    
+                    document.getElementById('aiResults').style.display = 'block';
+                    document.getElementById('aiResults').scrollIntoView({ behavior: 'smooth' });
+                    toast('✅ Analysis complete! Review your application package.');
+                } else {
+                    toast(data.error || 'Analysis failed', 'error');
+                }
+            } catch (err) {
+                console.error(err);
+                toast('Error during analysis. Make sure Ollama is running.', 'error');
+            } finally {
+                btn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoader.style.display = 'none';
+            }
+        });
+
+        // Download PDF package
+        async function downloadPDF() {
+            if (!currentAnalysisData) {
+                toast('No data to download', 'error');
+                return;
+            }
+            
+            try {
+                const res = await fetch(`${API}/ai/generate-pdf`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentAnalysisData)
+                });
+                
+                if (res.ok) {
+                    const blob = await res.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Application_${currentAnalysisData.companyName}_${currentAnalysisData.position}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    toast('📄 PDF downloaded successfully!');
+                } else {
+                    toast('Failed to generate PDF', 'error');
+                }
+            } catch (err) {
+                console.error(err);
+                toast('Error downloading PDF', 'error');
+            }
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tab = this.dataset.tab;
+                
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(`tab-${tab}`).classList.add('active');
+            });
+        });
+
+        // Chat functionality
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messagesDiv = document.getElementById('chatMessages');
+            
+            // Add user message
+            messagesDiv.innerHTML += `
+                <div class="chat-message user">
+                    <div class="sender">You</div>
+                    <div class="text">${message}</div>
+                </div>
+            `;
+            
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Add loading indicator
+            messagesDiv.innerHTML += `
+                <div class="chat-message ai" id="loadingMsg">
+                    <div class="sender">AI Career Advisor</div>
+                    <div class="text">⏳ Thinking...</div>
+                </div>
+            `;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            try {
+                const res = await fetch(`${API}/ai/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                
+                const data = await res.json();
+                
+                // Remove loading message
+                document.getElementById('loadingMsg').remove();
+                
+                if (data.success) {
+                    messagesDiv.innerHTML += `
+                        <div class="chat-message ai">
+                            <div class="sender">AI Career Advisor</div>
+                            <div class="text">${data.response}</div>
+                        </div>
+                    `;
+                } else {
+                    messagesDiv.innerHTML += `
+                        <div class="chat-message ai">
+                            <div class="sender">AI Career Advisor</div>
+                            <div class="text" style="color: #e74c3c;">Error: ${data.error}</div>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                document.getElementById('loadingMsg').remove();
+                messagesDiv.innerHTML += `
+                    <div class="chat-message ai">
+                        <div class="sender">AI Career Advisor</div>
+                        <div class="text" style="color: #e74c3c;">Connection error. Make sure Ollama is running.</div>
+                    </div>
+                `;
+            }
+            
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                toast('📋 Copied to clipboard!');
+            });
+        }
+
+        // Enter key for chat
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+
+        // Check AI status on load
+        checkAIStatus();
+        setInterval(checkAIStatus, 30000); // Check every 30 seconds
 
         async function loadApps() {
             try {
