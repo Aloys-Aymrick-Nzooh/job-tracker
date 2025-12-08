@@ -3,651 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Tracker</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 24px 32px;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .header h1 {
-            font-size: 24px;
-            font-weight: 600;
-        }
-        
-        .sync-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #ecf0f1;
-        }
-        
-        .sync-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #2ecc71;
-        }
-        
-        .content {
-            padding: 32px;
-        }
-        
-        .form-section {
-            background: #fafafa;
-            padding: 24px;
-            border-radius: 6px;
-            margin-bottom: 32px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .section-header h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .mode-badge {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .mode-add {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        
-        .mode-edit {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .form-field {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-field label {
-            margin-bottom: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #555;
-        }
-        
-        .form-field input,
-        .form-field select,
-        .form-field textarea {
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        
-        .form-field input:focus,
-        .form-field select:focus,
-        .form-field textarea:focus {
-            outline: none;
-            border-color: #2c3e50;
-        }
-        
-        .form-field textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
-        
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .btn-primary {
-            background: #2c3e50;
-            color: white;
-        }
-        
-        .btn-primary:hover:not(:disabled) {
-            background: #34495e;
-        }
-        
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-            display: none;
-        }
-        
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-        
-        .btn-secondary.visible {
-            display: block;
-        }
-        
-        .btn-edit {
-            background: #f39c12;
-            color: white;
-            padding: 6px 14px;
-            font-size: 13px;
-            margin-right: 6px;
-        }
-        
-        .btn-edit:hover {
-            background: #e67e22;
-        }
-        
-        .btn-delete {
-            background: #e74c3c;
-            color: white;
-            padding: 6px 14px;
-            font-size: 13px;
-        }
-        
-        .btn-delete:hover {
-            background: #c0392b;
-        }
-        
-        .table-wrapper {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        
-        .table-container {
-            overflow-x: auto;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th {
-            background: #34495e;
-            color: white;
-            padding: 12px 16px;
-            text-align: left;
-            font-weight: 500;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 14px;
-        }
-        
-        tr:hover {
-            background: #fafafa;
-        }
-        
-        tr.editing-row {
-            background: #fff9e6;
-        }
-        
-        .status {
-            padding: 4px 10px;
-            border-radius: 3px;
-            font-size: 12px;
-            font-weight: 500;
-            display: inline-block;
-        }
-        
-        .status-applied { 
-            background: #e3f2fd; 
-            color: #1565c0; 
-        }
-        
-        .status-interview-scheduled { 
-            background: #fff3e0; 
-            color: #ef6c00; 
-        }
-        
-        .status-interviewed { 
-            background: #f3e5f5; 
-            color: #7b1fa2; 
-        }
-        
-        .status-offer-received { 
-            background: #e8f5e9; 
-            color: #2e7d32; 
-        }
-        
-        .status-rejected { 
-            background: #ffebee; 
-            color: #c62828; 
-        }
-        
-        .status-withdrawn { 
-            background: #f5f5f5; 
-            color: #616161; 
-        }
-        
-        .empty {
-            text-align: center;
-            padding: 48px 20px;
-            color: #999;
-        }
-        
-        .empty p {
-            margin-top: 8px;
-            font-size: 14px;
-        }
-        
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 14px 20px;
-            border-radius: 4px;
-            color: white;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-        
-        .toast.success {
-            background: #27ae60;
-        }
-        
-        .toast.error {
-            background: #e74c3c;
-        }
-
-        .stats-section {
-            background: white;
-            padding: 24px 32px;
-            margin-bottom: 32px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .stats-section h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-        }
-
-        .stat-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            border-left: 4px solid;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .stat-total { border-left-color: #3498db; }
-        .stat-pending { border-left-color: #f39c12; }
-        .stat-interview { border-left-color: #9b59b6; }
-        .stat-offer { border-left-color: #27ae60; }
-        .stat-rejected { border-left-color: #e74c3c; }
-        .stat-rate { border-left-color: #1abc9c; }
-
-        .stat-icon {
-            font-size: 32px;
-            opacity: 0.8;
-        }
-
-        .stat-content {
-            flex: 1;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #2c3e50;
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #7f8c8d;
-            font-weight: 500;
-        }
-
-        .ai-assistant-section {
-            background: white;
-            padding: 24px 32px;
-            margin-bottom: 32px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .ai-status {
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .ai-status.online {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .ai-status.offline {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        .ai-container {
-            margin-top: 20px;
-        }
-
-        .ai-upload-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .ai-upload-section h3 {
-            font-size: 16px;
-            margin-bottom: 16px;
-            color: #2c3e50;
-        }
-
-        .upload-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .upload-field {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .upload-field.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .upload-field label {
-            margin-bottom: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #555;
-        }
-
-        .upload-field input,
-        .upload-field textarea {
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-        }
-
-        .upload-field small {
-            margin-top: 4px;
-            font-size: 12px;
-            color: #777;
-        }
-
-        .upload-field textarea {
-            resize: vertical;
-        }
-
-        .btn-analyze {
-            width: 100%;
-            padding: 14px;
-            font-size: 15px;
-            margin-top: 8px;
-        }
-
-        .ai-results {
-            background: #f8f9fa;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            background: white;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .results-header h3 {
-            font-size: 16px;
-            color: #2c3e50;
-            margin: 0;
-        }
-
-        .btn-download {
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-
-        .result-tabs {
-            display: flex;
-            background: #e9ecef;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            font-weight: 500;
-            color: #6c757d;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .tab-btn:hover {
-            background: #dee2e6;
-        }
-
-        .tab-btn.active {
-            background: white;
-            color: #2c3e50;
-            border-bottom: 3px solid #2c3e50;
-        }
-
-        .result-content {
-            padding: 20px;
-            background: white;
-        }
-
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
-        }
-
-        .copy-hint {
-            background: #fff3cd;
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: #856404;
-            border-left: 3px solid #ffc107;
-        }
-
-        .tab-pane pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: inherit;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-            margin-bottom: 16px;
-            background: #f8f9fa;
-            padding: 16px;
-            border-radius: 4px;
-            border: 1px solid #dee2e6;
-        }
-
-        .btn-copy {
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-
-        .ai-chat-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .ai-chat-section h3 {
-            font-size: 16px;
-            margin-bottom: 16px;
-            color: #2c3e50;
-        }
-
-        .chat-messages {
-            background: white;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 16px;
-            min-height: 250px;
-            max-height: 400px;
-            overflow-y: auto;
-            margin-bottom: 12px;
-        }
-
-        .chat-message {
-            margin-bottom: 16px;
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        .chat-message.user {
-            background: #e3f2fd;
-            margin-left: 20%;
-        }
-
-        .chat-message.ai {
-            background: #f5f5f5;
-            margin-right: 20%;
-        }
-
-        .chat-message .sender {
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 4px;
-            color: #555;
-        }
-
-        .chat-message .text {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .chat-input-container {
-            display: flex;
-            gap: 12px;
-        }
-
-        .chat-input-container input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-            
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-    </style>
+    <title>Job Tracker with AI Assistant</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
@@ -658,6 +15,8 @@
                 <span>Auto-sync enabled</span>
             </div>
         </div>
+
+        <!-- Statistics Section -->
         <div class="stats-section">
             <h2>Statistics Overview</h2>
             <div class="stats-grid">
@@ -668,7 +27,6 @@
                         <div class="stat-label">Total Applications</div>
                     </div>
                 </div>
-                
                 <div class="stat-card stat-pending">
                     <div class="stat-icon"></div>
                     <div class="stat-content">
@@ -676,7 +34,6 @@
                         <div class="stat-label">Pending</div>
                     </div>
                 </div>
-                
                 <div class="stat-card stat-interview">
                     <div class="stat-icon"></div>
                     <div class="stat-content">
@@ -684,7 +41,6 @@
                         <div class="stat-label">Interviews</div>
                     </div>
                 </div>
-                
                 <div class="stat-card stat-offer">
                     <div class="stat-icon"></div>
                     <div class="stat-content">
@@ -692,7 +48,6 @@
                         <div class="stat-label">Offers</div>
                     </div>
                 </div>
-                
                 <div class="stat-card stat-rejected">
                     <div class="stat-icon"></div>
                     <div class="stat-content">
@@ -700,7 +55,6 @@
                         <div class="stat-label">Rejections</div>
                     </div>
                 </div>
-                
                 <div class="stat-card stat-rate">
                     <div class="stat-icon"></div>
                     <div class="stat-content">
@@ -711,14 +65,40 @@
             </div>
         </div>
 
+        <!-- AI Assistant Section -->
         <div class="ai-assistant-section">
             <div class="section-header">
-                <h2>🤖 AI Job Application Assistant</h2>
+                <h2> AI Job Application Assistant</h2>
                 <span id="aiStatus" class="ai-status">Checking...</span>
             </div>
             
             <div class="ai-container">
-                <!-- Upload Section -->
+
+                <!-- LLM Selection -->
+                <div class="ai-upload-section">
+                    <h3>AI Model & Provider</h3>
+                    <div class="upload-grid">
+                        <div class="upload-field">
+                            <label for="aiProvider">AI Provider *</label>
+                            <select id="aiProvider" required>
+                                <option value="ollama">Ollama (Local)</option>
+                                <option value="openai">OpenAI</option>
+                                <option value="claude">Claude</option>
+                                <option value="gemini">Gemini</option>
+                            </select>
+                        </div>
+                        <div class="upload-field">
+                            <label for="aiModel">Model *</label>
+                            <select id="aiModel" required></select>
+                        </div>
+                        <div class="upload-field" id="apiKeyField" style="display:none;">
+                            <label for="aiApiKey">API Key</label>
+                            <input type="text" id="aiApiKey" placeholder="Enter API key for selected provider">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload CV & Job Info -->
                 <div class="ai-upload-section">
                     <h3>Upload & Analyze</h3>
                     <form id="aiAnalysisForm">
@@ -759,46 +139,74 @@
                         </button>
                     </form>
                 </div>
-                
+
                 <!-- Results Section -->
                 <div id="aiResults" class="ai-results" style="display:none;">
                     <div class="results-header">
                         <h3> Your Application Package</h3>
-                        <button class="btn-primary btn-download" onclick="downloadPDF()">
-                             Download PDF Package
-                        </button>
+                        <!--  Boutons séparés pour CV et Lettre -->
+                        <div class="download-buttons">
+                            <button class="btn-primary btn-download" onclick="downloadCVPDF()">
+                                 Download CV (PDF)
+                            </button>
+                            <button class="btn-primary btn-download" onclick="downloadCoverLetterPDF()">
+                             Download Cover Letter (PDF)
+                            </button>
+                        </div>
                     </div>
                     
                     <div class="result-tabs">
                         <button class="tab-btn active" data-tab="analysis"> Analysis</button>
                         <button class="tab-btn" data-tab="cv"> Tailored CV</button>
-                        <button class="tab-btn" data-tab="cover"> Cover Letter</button>
+                        <button class="tab-btn" data-tab="cover">Cover Letter</button>
                         <button class="tab-btn" data-tab="messages"> Recruiter Messages</button>
                     </div>
                     
                     <div class="result-content">
+                        <!-- Analysis Tab (non modifiable) -->
                         <div id="tab-analysis" class="tab-pane active">
                             <pre id="analysisContent"></pre>
                         </div>
                         
+                        <!-- CV Tab ( MODIFIABLE) -->
                         <div id="tab-cv" class="tab-pane">
-                            <div class="copy-hint"> Copy this and use it for your application</div>
-                            <pre id="cvContent"></pre>
-                            <button class="btn-secondary btn-copy" onclick="copyToClipboard('cvContent')">
-                                 Copy CV
-                            </button>
+                            <div class="copy-hint">
+                                 You can edit the CV before downloading or copying
+                            </div>
+                            <!--  TEXTAREA au lieu de PRE -->
+                            <textarea id="cvContent" rows="20" class="editable-content"></textarea>
+                            <div class="action-buttons">
+                                <button class="btn-secondary btn-copy" onclick="copyToClipboard('cvContent')">
+                                     Copy CV
+                                </button>
+                                <button class="btn-primary" onclick="downloadCVPDF()">
+                                     Download CV (PDF)
+                                </button>
+                            </div>
                         </div>
                         
+                        <!-- Cover Letter Tab ( MODIFIABLE) -->
                         <div id="tab-cover" class="tab-pane">
-                            <div class="copy-hint">✨ Personalize and send with your application</div>
-                            <pre id="coverContent"></pre>
-                            <button class="btn-secondary btn-copy" onclick="copyToClipboard('coverContent')">
-                                Copy Cover Letter
-                            </button>
+                            <div class="copy-hint">
+                                 You can edit the cover letter before downloading or copying
+                            </div>
+                            <!--  TEXTAREA au lieu de PRE -->
+                            <textarea id="coverContent" rows="20" class="editable-content"></textarea>
+                            <div class="action-buttons">
+                                <button class="btn-secondary btn-copy" onclick="copyToClipboard('coverContent')">
+                                     Copy Cover Letter
+                                </button>
+                                <button class="btn-primary" onclick="downloadCoverLetterPDF()">
+                                     Download Cover Letter (PDF)
+                                </button>
+                            </div>
                         </div>
                         
+                        <!-- Recruiter Messages Tab (non modifiable) -->
                         <div id="tab-messages" class="tab-pane">
-                            <div class="copy-hint"> Use these templates to reach out to recruiters on LinkedIn or via email</div>
+                            <div class="copy-hint">
+                                 Use these templates to reach out to recruiters on LinkedIn or via email
+                            </div>
                             <pre id="messagesContent"></pre>
                             <button class="btn-secondary btn-copy" onclick="copyToClipboard('messagesContent')">
                                  Copy Messages
@@ -806,8 +214,7 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Chat Section -->
+                                <!-- Chat Section -->
                 <div class="ai-chat-section">
                     <h3> Chat with AI Career Advisor</h3>
                     <div id="chatMessages" class="chat-messages">
@@ -821,43 +228,36 @@
                         <button onclick="sendChatMessage()" class="btn-primary">Send</button>
                     </div>
                 </div>
+
             </div>
         </div>
 
-
-
-        
+        <!-- Job Applications Form -->
         <div class="content">
             <div class="form-section">
                 <div class="section-header">
                     <h2 id="formTitle">New Application</h2>
                     <span id="modeBadge" class="mode-badge mode-add">Add</span>
                 </div>
-                
                 <form id="appForm">
                     <input type="hidden" id="editId" value="">
-                    
                     <div class="form-grid">
                         <div class="form-field">
                             <label for="company">Company *</label>
                             <input type="text" id="company" required>
                         </div>
-                        
                         <div class="form-field">
                             <label for="position">Position *</label>
                             <input type="text" id="position" required>
                         </div>
-                        
                         <div class="form-field">
                             <label for="location">Location</label>
                             <input type="text" id="location">
                         </div>
-                        
                         <div class="form-field">
                             <label for="dateApplied">Date Applied *</label>
                             <input type="date" id="dateApplied" required>
                         </div>
-                        
                         <div class="form-field">
                             <label for="status">Status *</label>
                             <select id="status" required>
@@ -869,35 +269,30 @@
                                 <option value="Withdrawn">Withdrawn</option>
                             </select>
                         </div>
-                        
                         <div class="form-field">
                             <label for="salary">Salary Range</label>
                             <input type="text" id="salary">
                         </div>
-                        
                         <div class="form-field">
                             <label for="contact">Contact Person</label>
                             <input type="text" id="contact">
                         </div>
-                        
                         <div class="form-field">
                             <label for="jobUrl">Job URL</label>
                             <input type="url" id="jobUrl">
                         </div>
                     </div>
-                    
                     <div class="form-field">
                         <label for="notes">Notes</label>
                         <textarea id="notes"></textarea>
                     </div>
-                    
                     <div class="form-actions">
                         <button type="submit" class="btn-primary" id="submitBtn">Add Application</button>
                         <button type="button" class="btn-secondary" id="cancelBtn" onclick="cancelEdit()">Cancel</button>
                     </div>
                 </form>
             </div>
-            
+
             <div class="table-wrapper">
                 <div class="table-container">
                     <table>
@@ -914,431 +309,17 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody">
-                        </tbody>
+                        <tbody id="tableBody"></tbody>
+                        <div id="emptyState" class="empty">
+                            <h3>No applications yet</h3>
+                            <p>Add your first job application above to get started</p>
+                        </div>
                     </table>
-                    <div id="emptyState" class="empty">
-                        <h3>No applications yet</h3>
-                        <p>Add your first job application above to get started</p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const API = 'http://localhost:8000/api';
-        let editingId = null;
-        let apps = [];
-        
-        function toast(msg, type = 'success') {
-            const div = document.createElement('div');
-            div.className = `toast ${type}`;
-            div.textContent = msg;
-            document.body.appendChild(div);
-            setTimeout(() => div.remove(), 3000);
-        }
-        
-        
-        function renderTable() {
-            const tbody = document.getElementById('tableBody');
-            const empty = document.getElementById('emptyState');
-            
-            if (!apps || apps.length === 0) {
-                tbody.innerHTML = '';
-                empty.style.display = 'block';
-                return;
-            }
-            
-            empty.style.display = 'none';
-            tbody.innerHTML = apps.map(app => {
-                const statusClass = app.Status.toLowerCase().replace(/\s+/g, '-');
-                const isEditing = editingId === app.ID;
-                return `
-                    <tr class="${isEditing ? 'editing-row' : ''}">
-                        <td><strong>${app.Company}</strong></td>
-                        <td>${app.Position}</td>
-                        <td>${app.Location || '-'}</td>
-                        <td>${new Date(app['Date Applied']).toLocaleDateString()}</td>
-                        <td><span class="status status-${statusClass}">${app.Status}</span></td>
-                        <td>${app['Salary Range'] || '-'}</td>
-                        <td>${app['Contact Person'] || '-'}</td>
-                        <td>${app.Notes || '-'}</td>
-                        <td>
-                            <button class="btn-edit" onclick="edit(${app.ID})">Edit</button>
-                            <button class="btn-delete" onclick="remove(${app.ID})">Delete</button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
-        
-        function edit(id) {
-            const app = apps.find(a => a.ID === id);
-            if (!app) return;
-            
-            document.getElementById('editId').value = app.ID;
-            document.getElementById('company').value = app.Company;
-            document.getElementById('position').value = app.Position;
-            document.getElementById('location').value = app.Location || '';
-            document.getElementById('dateApplied').value = app['Date Applied'];
-            document.getElementById('status').value = app.Status;
-            document.getElementById('salary').value = app['Salary Range'] || '';
-            document.getElementById('contact').value = app['Contact Person'] || '';
-            document.getElementById('jobUrl').value = app['Job URL'] || '';
-            document.getElementById('notes').value = app.Notes || '';
-            
-            editingId = id;
-            document.getElementById('formTitle').textContent = 'Edit Application';
-            document.getElementById('modeBadge').textContent = 'Edit';
-            document.getElementById('modeBadge').className = 'mode-badge mode-edit';
-            document.getElementById('submitBtn').textContent = 'Update';
-            document.getElementById('cancelBtn').classList.add('visible');
-            
-            document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
-            renderTable();
-        }
-        
-        function cancelEdit() {
-            editingId = null;
-            document.getElementById('editId').value = '';
-            document.getElementById('appForm').reset();
-            document.getElementById('dateApplied').valueAsDate = new Date();
-            
-            document.getElementById('formTitle').textContent = 'New Application';
-            document.getElementById('modeBadge').textContent = 'Add';
-            document.getElementById('modeBadge').className = 'mode-badge mode-add';
-            document.getElementById('submitBtn').textContent = 'Add Application';
-            document.getElementById('cancelBtn').classList.remove('visible');
-            
-            renderTable();
-        }
-        
-        document.getElementById('appForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.textContent;
-            btn.disabled = true;
-            btn.textContent = 'Saving...';
-            
-            const editId = document.getElementById('editId').value;
-            const data = {
-                company: document.getElementById('company').value,
-                position: document.getElementById('position').value,
-                location: document.getElementById('location').value,
-                dateApplied: document.getElementById('dateApplied').value,
-                status: document.getElementById('status').value,
-                salary: document.getElementById('salary').value,
-                contact: document.getElementById('contact').value,
-                jobUrl: document.getElementById('jobUrl').value,
-                notes: document.getElementById('notes').value
-            };
-            
-            try {
-                let res;
-                if (editId) {
-                    res = await fetch(`${API}/applications/${editId}`, {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                } else {
-                    data.id = Date.now();
-                    res = await fetch(`${API}/applications`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                }
-                
-                const result = await res.json();
-                if (result.success) {
-                    toast(editId ? 'Application updated' : 'Application added');
-                    cancelEdit();
-                    await loadApps();
-                } else {
-                    toast('Save failed', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                toast('Error saving application', 'error');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = originalText;
-            }
-        });
-        
-        async function remove(id) {
-            if (!confirm('Delete this application?')) return;
-            
-            try {
-                const res = await fetch(`${API}/applications/${id}`, {
-                    method: 'DELETE'
-                });
-                
-                const result = await res.json();
-                if (result.success) {
-                    toast('Application deleted');
-                    if (editingId === id) cancelEdit();
-                    await loadApps();
-                } else {
-                    toast('Delete failed', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                toast('Error deleting', 'error');
-            }
-        }
-        
-        document.getElementById('dateApplied').valueAsDate = new Date();
-        loadApps();
-
-        function updateStatistics() {
-            const total = apps.length;
-            const pending = apps.filter(a => a.Status === 'Applied').length;
-            const interviews = apps.filter(a => 
-                a.Status === 'Interview Scheduled' || a.Status === 'Interviewed'
-            ).length;
-            const offers = apps.filter(a => a.Status === 'Offer Received').length;
-            const rejected = apps.filter(a => a.Status === 'Rejected').length;
-            
-            const interviewRate = total > 0 
-                ? Math.round(((interviews + offers) / total) * 100) 
-                : 0;
-            
-            document.getElementById('totalApps').textContent = total;
-            document.getElementById('pendingApps').textContent = pending;
-            document.getElementById('interviewApps').textContent = interviews;
-            document.getElementById('offerApps').textContent = offers;
-            document.getElementById('rejectedApps').textContent = rejected;
-            document.getElementById('successRate').textContent = interviewRate + '%';
-        }
-
-        let currentAnalysisData = null;
-
-        // Check Ollama status
-        async function checkAIStatus() {
-            try {
-                const res = await fetch(`${API}/ai/status`);
-                const data = await res.json();
-                const statusEl = document.getElementById('aiStatus');
-                
-                if (data.available) {
-                    statusEl.textContent = '🟢 AI Online';
-                    statusEl.className = 'ai-status online';
-                } else {
-                    statusEl.textContent = '🔴 AI Offline';
-                    statusEl.className = 'ai-status offline';
-                }
-            } catch (err) {
-                document.getElementById('aiStatus').textContent = '🔴 AI Offline';
-                document.getElementById('aiStatus').className = 'ai-status offline';
-            }
-        }
-
-        // Handle AI analysis form submission
-        document.getElementById('aiAnalysisForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btn = e.target.querySelector('.btn-analyze');
-            const btnText = btn.querySelector('.btn-text');
-            const btnLoader = btn.querySelector('.btn-loader');
-            
-            btn.disabled = true;
-            btnText.style.display = 'none';
-            btnLoader.style.display = 'inline';
-            
-            const formData = new FormData();
-            formData.append('cv', document.getElementById('cvFile').files[0]);
-            formData.append('jobUrl', document.getElementById('jobUrl').value);
-            formData.append('jobDescription', document.getElementById('jobDescription').value);
-            formData.append('companyName', document.getElementById('aiCompany').value);
-            formData.append('position', document.getElementById('aiPosition').value);
-            
-            try {
-                const res = await fetch(`${API}/ai/analyze`, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const data = await res.json();
-                
-                if (data.success) {
-                    currentAnalysisData = {
-                        tailoredCV: data.tailoredCV,
-                        coverLetter: data.coverLetter,
-                        companyName: document.getElementById('aiCompany').value,
-                        position: document.getElementById('aiPosition').value
-                    };
-                    
-                    document.getElementById('analysisContent').textContent = data.analysis;
-                    document.getElementById('cvContent').textContent = data.tailoredCV;
-                    document.getElementById('coverContent').textContent = data.coverLetter;
-                    document.getElementById('messagesContent').textContent = data.recruiterMessages;
-                    
-                    document.getElementById('aiResults').style.display = 'block';
-                    document.getElementById('aiResults').scrollIntoView({ behavior: 'smooth' });
-                    toast('✅ Analysis complete! Review your application package.');
-                } else {
-                    toast(data.error || 'Analysis failed', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                toast('Error during analysis. Make sure Ollama is running.', 'error');
-            } finally {
-                btn.disabled = false;
-                btnText.style.display = 'inline';
-                btnLoader.style.display = 'none';
-            }
-        });
-
-        // Download PDF package
-        async function downloadPDF() {
-            if (!currentAnalysisData) {
-                toast('No data to download', 'error');
-                return;
-            }
-            
-            try {
-                const res = await fetch(`${API}/ai/generate-pdf`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(currentAnalysisData)
-                });
-                
-                if (res.ok) {
-                    const blob = await res.blob();
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `Application_${currentAnalysisData.companyName}_${currentAnalysisData.position}.pdf`;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                    toast('📄 PDF downloaded successfully!');
-                } else {
-                    toast('Failed to generate PDF', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                toast('Error downloading PDF', 'error');
-            }
-        }
-
-        // Tab switching
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const tab = this.dataset.tab;
-                
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-                
-                this.classList.add('active');
-                document.getElementById(`tab-${tab}`).classList.add('active');
-            });
-        });
-
-        // Chat functionality
-        async function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            const messagesDiv = document.getElementById('chatMessages');
-            
-            // Add user message
-            messagesDiv.innerHTML += `
-                <div class="chat-message user">
-                    <div class="sender">You</div>
-                    <div class="text">${message}</div>
-                </div>
-            `;
-            
-            input.value = '';
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            
-            // Add loading indicator
-            messagesDiv.innerHTML += `
-                <div class="chat-message ai" id="loadingMsg">
-                    <div class="sender">AI Career Advisor</div>
-                    <div class="text">⏳ Thinking...</div>
-                </div>
-            `;
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            
-            try {
-                const res = await fetch(`${API}/ai/chat`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message })
-                });
-                
-                const data = await res.json();
-                
-                // Remove loading message
-                document.getElementById('loadingMsg').remove();
-                
-                if (data.success) {
-                    messagesDiv.innerHTML += `
-                        <div class="chat-message ai">
-                            <div class="sender">AI Career Advisor</div>
-                            <div class="text">${data.response}</div>
-                        </div>
-                    `;
-                } else {
-                    messagesDiv.innerHTML += `
-                        <div class="chat-message ai">
-                            <div class="sender">AI Career Advisor</div>
-                            <div class="text" style="color: #e74c3c;">Error: ${data.error}</div>
-                        </div>
-                    `;
-                }
-            } catch (err) {
-                document.getElementById('loadingMsg').remove();
-                messagesDiv.innerHTML += `
-                    <div class="chat-message ai">
-                        <div class="sender">AI Career Advisor</div>
-                        <div class="text" style="color: #e74c3c;">Connection error. Make sure Ollama is running.</div>
-                    </div>
-                `;
-            }
-            
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        // Copy to clipboard
-        function copyToClipboard(elementId) {
-            const text = document.getElementById(elementId).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                toast('📋 Copied to clipboard!');
-            });
-        }
-
-        // Enter key for chat
-        document.getElementById('chatInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-
-        // Check AI status on load
-        checkAIStatus();
-        setInterval(checkAIStatus, 30000); // Check every 30 seconds
-
-        async function loadApps() {
-            try {
-                const res = await fetch(`${API}/applications`);
-                apps = await res.json();
-                renderTable();
-                updateStatistics();
-            } catch (err) {
-                console.error(err);
-                toast('Could not load applications', 'error');
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
